@@ -10,10 +10,10 @@ export async function getMachineDetails( id) {
   
 
   export async function addMedicine( params) {
-    
+    console.log("params", params)
     const result = await httpAxios
-      .patch(`/api/machine/${params.id}/addmedicine`, params.medicine)
-      .then((Response) => Response.data);
-    return result;
+  .patch(`/api/machine/${params.id}/addmedicine`,{ data: params.medicine })
+  .then((response) => response.data);
+return result;
   }
   

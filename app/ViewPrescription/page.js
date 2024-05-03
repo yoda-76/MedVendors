@@ -5,7 +5,6 @@ import Testcard from "../Components/Showprescirption/Testcard";
 import Injectioncard from "../Components/Showprescirption/Injectioncard";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import QR from "../Components/QR";
 
 const Viewprescription = () => {
   const router = useRouter();

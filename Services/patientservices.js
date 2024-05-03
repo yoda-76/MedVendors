@@ -25,3 +25,18 @@ export async function getPatientDetails(id, details) {
     .then((Response) => Response.data);
   return result;
 }
+
+
+export async function saveQR(aadhar,date,medicine) {
+  const result = await httpAxios
+    .get(`/api/patient/${id}`, details)
+    .then((Response) => Response.data);
+  return result;
+}
+
+export async function buyMedicinenow(details) {
+  const result = await httpAxios
+    .post("/api/patient/buymedicine", details)
+    .then((Response) => Response.data);
+  return result;
+}

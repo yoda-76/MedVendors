@@ -1,5 +1,5 @@
 "use client";
-import { getPatientDetails } from "@/Services/patientservices";
+import { buyMedicinenow, getPatientDetails } from "@/Services/patientservices";
 import Patientprescriptions from "@/app/Components/Patientprescriptionscards";
 import { BsQrCode } from "react-icons/bs";
 import { useEffect, useState } from "react";
@@ -37,14 +37,10 @@ const patientid = ({ params }) => {
     sessionStorage.setItem("prescriptionDetails", JSON.stringify(sessionData));
     router.push("/ViewPrescription");
   }
-  const buyMedicine =(item)=>{
-    const sessionData = {
-      "item":item,
-      "backTo":"Patient Page",
-      "link":`Patient/${params.id}`
-    }
-    sessionStorage.setItem("prescriptionDetails", JSON.stringify(sessionData));
-    router.push("/Buymedicine");
+  const buyMedicine =async (item)=>{
+    const data = item;
+    const uid=await buyMedicinenow(item);
+    router.push(`/${uid.uid}`)
   }
 
   return (
@@ -68,7 +64,7 @@ const patientid = ({ params }) => {
       <hr className="border-blue-500" />
       <div>
         {details.prescriptions.length ? (
-          <Patientprescriptions prescriptions={details.prescriptions} buyMedicine={buyMedicine} viewPrescription={viewPrescription}/>
+          <Patientprescriptions prescriptions={details.prescriptions} viewPrescription={viewPrescription} buyPrescription={buyMedicine}/>
         ) : (
           <div className="text-center text-4xl my-4 text-white font-bold ">
             No Prescriptions Avaliable.

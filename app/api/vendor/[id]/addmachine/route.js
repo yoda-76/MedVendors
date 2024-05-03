@@ -6,26 +6,35 @@ export async function POST(req, { params }) {
   await connectDb();
   const { umid, address, longitude, latitude } = await req.json();
   const machinedata = await machine.findOne({ umid: umid });
-  // if (machinedata) {
-  //   const match=machinedata.medicines.filter((item, index)=>{
-  //     if(item.name===req.body.name && item.dosage===req.body.dosage &&item.price===req.body.price && item.cpsuleeachpack===req.body.cpsuleeachpack )return true
-  //   })
-  //   if(match[0]){
-
-  //   }
-  //   }
-    // await vendor.updateOne(
-    //   { _id: params.id },
-    //   { $push: { machinedetails: umid } }
-    // );
+  if (machinedata) {
+    if (machinedata.ownerid) {
+      return NextResponse.json(
+        { message: "Machine owner already exists" },
+        { status: 403 }
+      );
+    }
+    await vendor.updateOne(
+      { _id: params.id },
+      { $push: { machinedetails: umid } }
+    );
     await machine.updateOne(
       { umid: umid },
       {
         $set: {
-          medicines:{...req.body}
+          address: {
+            address: address,
+            longitude: longitude,
+            latitude: latitude,
+          },
+          ownerid: params.id,
         },
       }
     );
     return NextResponse.json({ message: "Machine added sucessfully" });
-  
+  } else {
+    return NextResponse.json(
+      { message: "No Machine Data Found" },
+      { status: 403 }
+    );
+  }
 }

@@ -1,6 +1,4 @@
-import QR from "./QR";
-
-const Patientprescriptions = ({ prescriptions, viewPrescription , buyMedicine }) => {
+const Patientprescriptions = ({ prescriptions, viewPrescription, buyPrescription }) => {
   return (
     <div className="my-4">
       {prescriptions.map((item) => (
@@ -28,11 +26,10 @@ const Patientprescriptions = ({ prescriptions, viewPrescription , buyMedicine })
             </button>
             <button
               className="bg-white mx-2 px-2 rounded my-2"
-              onClick={() => buyMedicine(item)}
+              onClick={() => buyPrescription(item)}
             >
               Buy Medicines
             </button>
-            
           </div>
         </div>
       ))}

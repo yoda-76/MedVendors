@@ -64,6 +64,9 @@ const PrescriptionSchema = new Schema({
     advice:{
         type:String,
     },
+    status:{
+        type:String,
+    }
 })
 export const prescription = 
     mongoose.models.prescription||mongoose.model("prescription",PrescriptionSchema)
