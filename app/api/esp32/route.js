@@ -13,6 +13,7 @@ export async function POST(req){
     // console.log()
     const uid = qrRes.data.replace("%3A", ":").replace("%20", " ").replace("\"", "").replace("\"", "")
     const qrdata=await qr.findOne({uid})
+    await qr.findOneAndDelete({uid})
 
     console.log(qrdata,uid)
     if(qrdata){
