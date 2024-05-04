@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import qrCodeDetector from "@/Services/qrCodeDetector";
 import { connectDb } from "@/helper/db";
+import { qr } from "@/models/QR";
 export async function POST(req){
   await connectDb();
   const { image } = await req.json();
@@ -9,7 +10,8 @@ export async function POST(req){
     return NextResponse.json("No Qr Found");
   }
   else{
-    console.log(qrRes.data.replace("%3A", ":"))
-    return NextResponse.json(qrRes.data);
+    // console.log()
+    const qr=await qr.findOne({uid:qrRes.data.replace("%3A", ":").replace("%20", " ")})
+    return NextResponse.json(qr.medicinedetails);
   }
 }
