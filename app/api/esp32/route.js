@@ -12,7 +12,13 @@ export async function POST(req){
   else{
     // console.log()
     const qrdata=await qr.findOne({uid:qrRes.data.replace("%3A", ":").replace("%20", " ")})
-    console.log(qrdata)
-    return NextResponse.json(qrdata.medicinedetails);
+
+    console.log(qrdata,{uid:qrRes.data.replace("%3A", ":").replace("%20", " ")})
+    if(qrdata){
+
+      return NextResponse.json(qrdata.medicinedetails);
+    }
+    return NextResponse.json("No Qr Found");
+
   }
 }
