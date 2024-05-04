@@ -9,7 +9,7 @@ export async function POST(req){
     return NextResponse.json("No Qr Found");
   }
   else{
-    console.log(qrRes.data)
+    console.log(qrRes.data.replace("%3A", ":"))
     return NextResponse.json(qrRes.data);
   }
 }
