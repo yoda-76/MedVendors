@@ -9,6 +9,7 @@ export async function POST(req){
     return NextResponse.json("No Qr Found");
   }
   else{
+    console.log(qrRes.data)
     return NextResponse.json(qrRes.data);
   }
 }
