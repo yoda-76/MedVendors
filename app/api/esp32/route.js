@@ -11,9 +11,9 @@ export async function POST(req){
   }
   else{
     // console.log()
-    const qrdata=await qr.findOne({uid:qrRes.data.replace("%3A", ":").replace("%20", " ")})
+    const qrdata=await qr.findOne({uid:qrRes.data.replace("%3A", ":").replace("%20", " ").replace("\"", "")})
 
-    console.log(qrdata,{uid:qrRes.data.replace("%3A", ":").replace("%20", " ")})
+    console.log(qrdata,{uid:qrRes.data.replace("%3A", ":").replace("%20", " ").replace("\"", "")})
     if(qrdata){
 
       return NextResponse.json(qrdata.medicinedetails);
