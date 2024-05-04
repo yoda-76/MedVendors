@@ -20,7 +20,7 @@ export async function POST(req){
 
       return NextResponse.json(qrdata.medicinedetails);
     }
-    return NextResponse.json("No Qr Found loda");
+    return NextResponse.json("No Qr Found");
 
   }
 }
