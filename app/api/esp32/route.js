@@ -11,7 +11,8 @@ export async function POST(req){
   }
   else{
     // console.log()
-    const qr=await qr.findOne({uid:qrRes.data.replace("%3A", ":").replace("%20", " ")})
-    return NextResponse.json(qr.medicinedetails);
+    const qrdata=await qr.findOne({uid:qrRes.data.replace("%3A", ":").replace("%20", " ")})
+    console.log(qrdata)
+    return NextResponse.json(qrdata.medicinedetails);
   }
 }
