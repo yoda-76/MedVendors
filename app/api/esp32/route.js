@@ -11,14 +11,15 @@ export async function POST(req){
   }
   else{
     // console.log()
-    const qrdata=await qr.findOne({uid:qrRes.data.replace("%3A", ":").replace("%20", " ").replace("\"", "")})
+    const uid = qrRes.data.replace("%3A", ":").replace("%20", " ").replace("\"", "").replace("\"", "")
+    const qrdata=await qr.findOne({uid})
 
-    console.log(qrdata,{uid:qrRes.data.replace("%3A", ":").replace("%20", " ").replace("\"", "")})
+    console.log(qrdata,uid)
     if(qrdata){
 
       return NextResponse.json(qrdata.medicinedetails);
     }
-    return NextResponse.json("No Qr Found");
+    return NextResponse.json("No Qr Found loda");
 
   }
 }
